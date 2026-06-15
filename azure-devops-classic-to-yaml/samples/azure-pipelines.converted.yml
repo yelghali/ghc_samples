@@ -1,0 +1,64 @@
+# Sample YAML draft based on common Classic build export cleanup patterns.
+# Replace placeholders before use.
+
+name: $(Date:yyyyMMdd).$(Rev:r)
+
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+
+variables:
+  - group: shared-nonprod-variables
+  - name: buildConfiguration
+    value: Release
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Build
+    displayName: Build and publish
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - checkout: self
+            persistCredentials: false
+
+          - task: UseDotNet@2
+            displayName: Install .NET SDK
+            inputs:
+              packageType: sdk
+              version: 8.x
+
+          - script: dotnet build --configuration $(buildConfiguration)
+            displayName: Build solution
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish drop
+            inputs:
+              targetPath: $(Build.SourcesDirectory)
+              artifact: drop
+
+  - stage: Deploy_NonProd
+    displayName: Deploy non-production
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: Deploy
+        displayName: Deploy application
+        environment: nonprod
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                - script: echo "Replace with deployment task mapped from Classic release."
+                  displayName: Placeholder deployment

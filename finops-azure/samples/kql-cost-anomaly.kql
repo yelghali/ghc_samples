@@ -1,0 +1,11 @@
+CostManagementExports
+| where UsageDate >= ago(30d)
+| summarize Cost = sum(CostInBillingCurrency) by bin(UsageDate, 1d), SubscriptionId, ResourceGroupName
+| order by SubscriptionId, ResourceGroupName, UsageDate asc
+| serialize
+| extend PreviousCost = prev(Cost)
+| extend Delta = Cost - PreviousCost
+| where isnotnull(PreviousCost) and PreviousCost > 0
+| extend DeltaPercent = Delta / PreviousCost
+| where DeltaPercent > 0.5 and Delta > 100
+| project UsageDate, SubscriptionId, ResourceGroupName, Cost, PreviousCost, Delta, DeltaPercent

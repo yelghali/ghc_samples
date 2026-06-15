@@ -1,0 +1,35 @@
+{
+  "pipelineName": "classic-pipeline-name",
+  "pipelineType": "classic-build-or-classic-release",
+  "sourceRepository": "repo-name",
+  "defaultBranch": "main",
+  "agentPools": [
+    "Azure Pipelines"
+  ],
+  "triggers": {
+    "ci": [],
+    "pr": [],
+    "schedules": []
+  },
+  "variables": {
+    "plain": [],
+    "secret": [],
+    "variableGroups": []
+  },
+  "serviceConnections": [],
+  "secureFiles": [],
+  "artifacts": [],
+  "stagesOrEnvironments": [
+    {
+      "name": "NonProd",
+      "approvals": [],
+      "gates": [],
+      "tasks": []
+    }
+  ],
+  "manualChecksRequired": [
+    "Confirm secret variables are not committed to YAML",
+    "Confirm YAML cron schedules are converted to UTC",
+    "Confirm environment approvals and checks are configured in Azure DevOps"
+  ]
+}

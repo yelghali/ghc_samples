@@ -1,0 +1,16 @@
+configuration:
+  AZURE_BICEP_FILE_EXPANSION: true
+  AZURE_PARAMETER_FILE_EXPANSION: true
+  AZURE_POLICY_WAIVER_PATH: .ps-rule/
+
+include:
+  module:
+    - PSRule.Rules.Azure
+
+input:
+  pathIgnore:
+    - '**/bin/**'
+    - '**/obj/**'
+
+rule:
+  includeLocal: true

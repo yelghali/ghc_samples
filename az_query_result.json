@@ -1,0 +1,26 @@
+﻿{
+    "resources":  {
+                      "value":  [
+                                    {
+                                        "location":  "eastus",
+                                        "name":  "stghcdevmg7x6qml5ohay",
+                                        "type":  "Microsoft.Storage/storageAccounts"
+                                    },
+                                    {
+                                        "location":  "eastus",
+                                        "name":  "stghcdevmg7x6qml5ohay-5802e66e-a59f-4b5b-97bb-f45fd4df1994",
+                                        "type":  "Microsoft.EventGrid/systemTopics"
+                                    }
+                                ],
+                      "Count":  2
+                  },
+    "storageAccount":  {
+                           "allowBlobPublicAccess":  false,
+                           "allowSharedKeyAccess":  false,
+                           "location":  "eastus",
+                           "minimumTlsVersion":  "TLS1_2",
+                           "name":  "stghcdevmg7x6qml5ohay",
+                           "provisioningState":  "Succeeded",
+                           "publicNetworkAccess":  "Disabled"
+                       }
+}
