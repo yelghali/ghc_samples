@@ -1,0 +1,10 @@
+# Generated PowerPoint/deck artifacts
+*.pptx
+~$*.pptx
+practical-examples/*-slides/
+practical-examples/deck-*.log
+practical-examples/*copilot-challenges*
+
+# Python caches
+__pycache__/
+*.pyc
